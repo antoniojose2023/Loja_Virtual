@@ -1,11 +1,13 @@
 package br.com.antoniodev.lojavirtual.presentation.view
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import br.com.antoniodev.lojavirtual.presentation.view.ProdutoActivity
 import br.com.antoniodev.lojavirtual.R
 import br.com.antoniodev.lojavirtual.databinding.ActivityMainBinding
 
@@ -24,7 +26,8 @@ class MainActivity : AppCompatActivity() {
 
 
         binding.fbtnProdutos.setOnClickListener {
-            Toast.makeText(this, "Clicou no Botão", Toast.LENGTH_SHORT).show()
+             startActivity(Intent(this, ProdutoActivity::class.java))
+             overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out)
         }
 
         binding.fbtnCarinho.setOnClickListener {

@@ -23,6 +23,10 @@ class ViewModelProduto @Inject constructor (val repositoryProdutoImpl: IReposito
     private var _produtosPromocionais = MutableLiveData<List<Product>>()
     val produtosPromocionais: LiveData<List<Product>> = _produtosPromocionais
 
+    private var _produto = MutableLiveData<Product>()
+    val produto: LiveData<Product> = _produto
+
+
     fun getProdutos(){
         viewModelScope.launch(Dispatchers.IO){
             val listaProdutos = repositoryProdutoImpl.getProdutos()
@@ -34,6 +38,13 @@ class ViewModelProduto @Inject constructor (val repositoryProdutoImpl: IReposito
         viewModelScope.launch(Dispatchers.IO){
             val listaProdutos = repositoryProdutoImpl.getProdutos()
             _produtosPromocionais.postValue( listaProdutos )
+        }
+    }
+
+    fun getProdutoPorId(idProduto: Int){
+        viewModelScope.launch(Dispatchers.IO){
+            val product = repositoryProdutoImpl.getProdutoPorId( idProduto )
+            _produto.postValue( product )
         }
     }
 

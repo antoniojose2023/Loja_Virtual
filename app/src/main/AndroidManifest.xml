@@ -15,6 +15,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.LojaVirtual">
         <activity
+            android:name=".presentation.view.ProdutoDetalheActivity"
+            android:exported="false" />
+        <activity
             android:name=".presentation.view.ProdutoActivity"
             android:exported="false" />
         <activity

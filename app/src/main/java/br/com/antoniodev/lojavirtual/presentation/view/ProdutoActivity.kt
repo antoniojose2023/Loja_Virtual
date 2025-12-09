@@ -1,5 +1,6 @@
 package br.com.antoniodev.lojavirtual.presentation.view
 
+import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import androidx.activity.enableEdgeToEdge
@@ -52,16 +53,26 @@ class ProdutoActivity : AppCompatActivity() {
                  }
         }
 
+
+
     }
 
     private fun configRecyclerViewHorizontal() {
-           adapterProduto = AdapterProduto()
+           adapterProduto = AdapterProduto(){product ->
+                    val intent = Intent(this, ProdutoDetalheActivity::class.java)
+                    intent.putExtra("idProduto", product.id)
+                    startActivity( intent )
+           }
            binding.rvProdutosPromocao.layoutManager = LinearLayoutManager( this, RecyclerView.HORIZONTAL, false )
            binding.rvProdutosPromocao.adapter = adapterProduto
     }
 
     private fun configRecyclerViewVertical() {
-           adapterProduto = AdapterProduto()
+           adapterProduto = AdapterProduto(){product ->
+               val intent = Intent(this, ProdutoDetalheActivity::class.java)
+               intent.putExtra("idProduto", product.id)
+               startActivity( intent )
+           }
            binding.rvProdutos.layoutManager = LinearLayoutManager( this, RecyclerView.VERTICAL, false )
            binding.rvProdutos.adapter = adapterProduto
     }

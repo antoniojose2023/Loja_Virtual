@@ -7,6 +7,7 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
@@ -62,7 +63,8 @@ class ProdutoActivity : AppCompatActivity() {
 
     private fun configRecyclerViewVertical() {
            adapterProduto = AdapterProduto()
-           binding.rvProdutos.layoutManager = LinearLayoutManager( this, RecyclerView.VERTICAL, false )
+           //binding.rvProdutos.layoutManager = LinearLayoutManager( this, RecyclerView.VERTICAL, false )
+           binding.rvProdutos.layoutManager = GridLayoutManager(this, 3)
            binding.rvProdutos.adapter = adapterProduto
     }
 

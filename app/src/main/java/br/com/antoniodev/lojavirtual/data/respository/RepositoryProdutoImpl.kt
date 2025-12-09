@@ -18,4 +18,16 @@ class RepositoryProdutoImpl @Inject constructor(val dummyJsonApi: DummyJsonApi):
 
          return emptyList()
     }
+
+    override suspend fun getProdutoPorId(idProduto: Int): Product {
+        val response = dummyJsonApi.getProdutoPorId( idProduto )
+        var produto: Product? = null
+
+       if(response.isSuccessful && response.body() != null){
+                produto = response.body()
+       }
+
+       return produto!!
+
+    }
 }

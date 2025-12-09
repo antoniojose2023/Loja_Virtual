@@ -5,4 +5,6 @@ import br.com.antoniodev.lojavirtual.model.produto.Product
 interface IRepositoryProduto {
 
     suspend fun getProdutos(): List<Product>
+
+    suspend fun getProdutoPorId(idProduto: Int): Product
 }

@@ -2,6 +2,8 @@ package br.com.antoniodev.lojavirtual.presentation.view
 
 import android.os.Bundle
 import android.os.Handler
+import android.view.View
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -10,12 +12,15 @@ import androidx.core.view.WindowInsetsCompat
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.transition.Visibility
 import androidx.viewpager2.widget.ViewPager2
 import br.com.antoniodev.lojavirtual.R
 import br.com.antoniodev.lojavirtual.databinding.ActivityProdutoBinding
 import br.com.antoniodev.lojavirtual.presentation.AdapterProduto
 import br.com.antoniodev.lojavirtual.presentation.viewmodel.ViewModelProduto
 import dagger.hilt.android.AndroidEntryPoint
+
+
 
 @AndroidEntryPoint
 class ProdutoActivity : AppCompatActivity() {
@@ -32,6 +37,11 @@ class ProdutoActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+
+        Handler().postDelayed({
+            binding.progressBar.visibility = View.GONE
+        }, 1500)
+
 
 
         viewModelProduto.produtosPromocionais.observe(this){ produtos ->
@@ -56,14 +66,20 @@ class ProdutoActivity : AppCompatActivity() {
     }
 
     private fun configRecyclerViewHorizontal() {
-           adapterProduto = AdapterProduto()
+           adapterProduto = AdapterProduto(){ product ->
+                 Toast.makeText(this, product.title, Toast.LENGTH_SHORT).show()
+           }
+
+
            binding.rvProdutosPromocao.layoutManager = LinearLayoutManager( this, RecyclerView.HORIZONTAL, false )
            binding.rvProdutosPromocao.adapter = adapterProduto
     }
 
     private fun configRecyclerViewVertical() {
-           adapterProduto = AdapterProduto()
-           //binding.rvProdutos.layoutManager = LinearLayoutManager( this, RecyclerView.VERTICAL, false )
+           adapterProduto = AdapterProduto(){ product ->
+               Toast.makeText(this, product.title, Toast.LENGTH_SHORT).show()
+           }
+
            binding.rvProdutos.layoutManager = GridLayoutManager(this, 3)
            binding.rvProdutos.adapter = adapterProduto
     }

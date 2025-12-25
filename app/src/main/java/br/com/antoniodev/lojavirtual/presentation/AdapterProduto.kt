@@ -10,7 +10,7 @@ import br.com.antoniodev.lojavirtual.model.produto.Product
 import com.google.gson.internal.bind.ReflectiveTypeAdapterFactory
 import com.squareup.picasso.Picasso
 
-class AdapterProduto(): RecyclerView.Adapter<AdapterProduto.ViewHolderProduto>() {
+class AdapterProduto(val onclickProduto: (Product)-> Unit = {}): RecyclerView.Adapter<AdapterProduto.ViewHolderProduto>() {
 
     val listaProdutos = mutableListOf<Product>()
 
@@ -31,6 +31,10 @@ class AdapterProduto(): RecyclerView.Adapter<AdapterProduto.ViewHolderProduto>()
         fun bind(produto: Product){
                binding.tvNomeProduto.text = produto.title
                Picasso.get().load( produto.images[0] ).into( binding.ivProduto )
+
+               itemView.setOnClickListener {
+                      onclickProduto(produto)
+               }
         }
     }
 }
